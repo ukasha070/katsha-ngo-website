@@ -54,7 +54,7 @@ const FaQs = () => {
                   Frequently Asked Questions
                 </h4>
 
-                <p className="max-w-lg">
+                <p className="max-w-lg text-base">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                   Impedit eos ipsam sint unde aperiam officia labore minus
                   possimus placeat itaque.
@@ -63,7 +63,7 @@ const FaQs = () => {
                 <div className="py-5">
                   <button
                     type="button"
-                    className="p-3 px-7 rounded-full bg-yellow-500 font-semibold"
+                    className="p-3 px-7 bg-yellow-500 font-semibold"
                   >
                     Load more
                   </button>

@@ -41,7 +41,7 @@ const FaqCard = ({ setCurrentFaq, ...props }: TFaqCardProps) => {
             <div className="p-5 pt-0">
               <p className="text-base">{props.answer}</p>
 
-              <span className="block mt-3 text-sm text-black/50">
+              <span className="block mt-5 text-sm text-black/50">
                 Created at: {props._created_at}
               </span>
             </div>

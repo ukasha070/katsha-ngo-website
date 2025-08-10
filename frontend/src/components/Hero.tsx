@@ -46,35 +46,37 @@ function ActiveVoluteers() {
 const Hero = () => {
   return (
     <div id="hero-container" className="py-8 md:py-24">
-      <MaxWidthWrapper className="pt-4 text-sm overflow-visible md:px-0">
+      <MaxWidthWrapper className="pt-4 text-sm overflow-x-hidden overflow-y-visible md:px-0">
         <div className="w-full flex items-center flex-row md:flex-row max-sm:w-full md:w-11/12 mx-auto gap-10 md:justify-between max-md:flex-wrap max-md:justify-center max-md:text-center">
           <div className="w-full">
             <ActiveVoluteers />
 
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold my-4 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black my-4 leading-tight">
               Making Ug<span className="text-yellow-500">an</span>
               <span className="text-red-500">da</span> Better
             </h1>
 
-            <p className="text-lg mb-4">
-              Uganda stands at a crossroads—facing urgent challenges, but also
-              powerful opportunities to grow through digital innovation,
-              inclusive access, and future-ready solutions.
-            </p>
+            <div className="font-semibold text-black/60 p-2">
+              <p className="text-lg mb-4">
+                Uganda stands at a crossroads—facing urgent challenges, but also
+                powerful opportunities to grow through digital innovation,
+                inclusive access, and future-ready solutions.
+              </p>
 
-            <p className="text-lg ">
-              We work with communities, government, and partners to build a
-              digitally empowered Uganda—where technology drives education,
-              health, jobs, and transparency for everyone, especially the
-              underserved.
-            </p>
+              <p className="text-lg">
+                We work with communities, government, and partners to build a
+                digitally empowered Uganda—where technology drives education,
+                health, jobs, and transparency for everyone, especially the
+                underserved.
+              </p>
+            </div>
 
             {/* Buttons Section */}
             <div className="flex gap-3 flex-col lg:flex-row items-center mt-8">
               <Link
                 href=""
                 rel="noopener"
-                className="flex items-center group py-4 pl-6 px-5 rounded-full text-base font-bold bg-yellow-500"
+                className="flex items-center group py-4 pl-6 px-5 text-base font-bold bg-yellow-500"
               >
                 <span>Learn more</span>
                 <ArrowHead />

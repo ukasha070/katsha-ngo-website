@@ -75,7 +75,7 @@ const Testimonials = () => {
           </div>
 
           <div className="relative">
-            <div className="absolute w-full h-28 bg-gradient-to-t from-black/40 via-black/20 to-transparent -mt-[8rem] z-10 flex items-center justify-center">
+            <div className="absolute w-full h-28 bg-gradient-to-t from-black/40 via-black/20 to-transparent -mt-[8rem] flex items-center justify-center">
               <button type="button">
                 <p className="p-3 px-8 bg-yellow-500 font-bold">Load More</p>
               </button>

@@ -1,25 +1,35 @@
 "use client";
 
-import React, { useState, FormEvent } from "react";
 import Link from "next/link";
-import { ExternalLink, X } from "lucide-react";
 import CustomBtn from "../buttons/CustomBtn";
+import { useStore } from "@/hooks/useStore";
+import React, { useState, FormEvent } from "react";
+import { donationFormSteps } from "@/lib/contants";
+import { ExternalLink, Repeat, X } from "lucide-react";
+import FadeInOutWrapper from "../FadeInOutWrapper";
+import { closeDonationForm } from "@/store/slice/donationFormSlice";
 
 const DonationSteps = () => {
   return (
-    <div className="">
-      <div className="flex items-center justify-between gap-6 my-10">
-        <div className="w-1/2 h-fit flex flex-col cursor-pointer justify-center items-start">
-          <div className="w-full h-1 bg-blue-500" />
-          <span className="text-xs mt-1 mb-2">Step 1</span>
-          <p className="font-semibold">Amount</p>
-        </div>
-
-        <div className="w-1/2 h-fit flex flex-col cursor-pointer justify-center items-start">
-          <div className="w-full h-1 bg-black/40" />
-          <span className="text-xs mt-1 mb-2">Step 2</span>
-          <p className="font-semibold">Information</p>
-        </div>
+    <div>
+      <div className="flex items-start justify-between  my-10">
+        {donationFormSteps.map((donationFormStepItem, _) => (
+          <div
+            key={donationFormStepItem.id}
+            className="w-1/2 h-fit flex flex-col cursor-pointer justify-center items-start "
+          >
+            <div className="w-full flex items-center justify-center">
+              <div className="bg-black/40 h-9 w-9 min-w-9 flex items-center justify-center">
+                <span className="font-bold">{donationFormStepItem.id}</span>
+              </div>
+              <div className="w-full h-1 bg-black/40 " />
+            </div>
+            <span className="text-xs mt-1 mb-1">
+              Step {donationFormStepItem.id}
+            </span>
+            <p className="font-semibold">{donationFormStepItem.title}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -65,69 +75,65 @@ const InformationForm = () => {
 };
 
 const AmountForm = () => {
-  const [usdAmount, setUsdAmount] = useState<number | null>(null);
-  const [ugxAmount, setUgxAmount] = useState<string>("");
-
   const quickAmounts: number[] = [5, 10, 20, 50, 100];
+  const [donationAmount, setDonationAmount] = useState<number | null>();
+  const [donationCurrency, setDonationCurrency] = useState<"UGX" | "USD">(
+    "UGX"
+  );
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
-    if (usdAmount) {
-      alert(`Donating $${usdAmount} USD`);
-    } else if (ugxAmount) {
-      alert(`Donating ${ugxAmount} UGX`);
-    } else {
-      alert("Please enter an amount to donate.");
-    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       {/* Quick Donation USD */}
       <div>
-        <div className="flex items-center text-gray-700 font-medium mb-2">
-          <p>Quick Donation</p>
-          <select name="currency" id="" className="w-fit px-2 font-bold">
+        <div className="flex items-center text-gray-700 font-medium gap-4 pb-2">
+          <select
+            name="currency"
+            id=""
+            className="w-full px-2 font-bold h-12 form-input"
+          >
             <option value="USD">USD</option>
             <option value="USD">UGX</option>
           </select>
+          <div className="w-full flex items-center justify-center">
+            <Repeat className="size-6 stroke-2" />
+          </div>
+          <div className="w-full px-5 font-bold h-12 form-input flex items-center">
+            <p>UGX</p>
+          </div>
         </div>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3 border-t pt-5">
           {quickAmounts.map((amount) => (
             <button
               type="button"
               key={amount}
-              onClick={() => setUsdAmount(amount)}
               className={`px-4 py-2 rounded-lg font-semibold border transition-all duration-200 ${
-                usdAmount === amount
-                  ? "bg-yellow-500 text-white border-yellow-500"
-                  : "bg-white text-gray-700 border-gray-300 hover:border-yellow-500 hover:text-yellow-500"
+                amount === 1
+                  ? "bg-yellow-500 text-white "
+                  : "bg-white text-gray-700"
               }`}
             >
               ${amount}
             </button>
           ))}
+
+          <button
+            type="button"
+            className="px-4 py-2 rounded-lg font-semibold border border-black/50 transition-all duration-200"
+          >
+            <span>Custom</span>
+          </button>
         </div>
       </div>
 
-      {/* Custom Donation in UGX */}
-      <div>
-        <label htmlFor="amout" className="block text-gray-700 font-medium mb-2">
-          Donation amount
-        </label>
-        <input
-          type="number"
-          id="ugxAmount"
-          value={ugxAmount}
-          onChange={(e) => {
-            setUgxAmount(e.target.value);
-            setUsdAmount(null);
-          }}
-          placeholder="Enter amount in USD"
-          className="form-input"
-        />
-      </div>
+      {false && (
+        <div>
+          <input placeholder="Enter amount in USD" className="form-input" />
+        </div>
+      )}
 
       <div>
         <div className="flex items-center gap-5 text-lg">
@@ -137,25 +143,27 @@ const AmountForm = () => {
       </div>
 
       {/* Submit */}
-      <button
+      <CustomBtn
         type="submit"
-        className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 rounded-lg transition-colors duration-200"
+        className="w-full bg-yellow-500 hover:bg-yellow-600 text-foreground font-semibold py-3 transition-colors duration-200"
       >
-        Next Step
-      </button>
+        <span>Next Step</span>
+      </CustomBtn>
     </form>
   );
 };
 
 const DonationForm = () => {
+  const { state, dispatch } = useStore();
   return (
-    <>
+    <FadeInOutWrapper isVisible={state.donationForm.isOpen}>
       <div className="fixed top-0 right-0 left-0  min-w-screen h-screen overflow-y-auto z-100  bg-black/50 backdrop-blur flex items-center justify-center">
         <div className="h-full w-full relative">
           <div className="w-10/12 md:max-w-md mx-auto mt-10 bg-white p-6 relative">
             <button
               type="button"
-              className="absolute -top-3 -left-4 bg-accent rounded-md h-10 w-10 border border-primary flex items-center justify-center"
+              onClick={() => dispatch(closeDonationForm())}
+              className="absolute -top-3 -left-4 bg-accent h-10 w-10 border flex items-center justify-center"
             >
               <X className="size-5 stroke-2" />
             </button>
@@ -193,7 +201,7 @@ const DonationForm = () => {
           </div>
         </div>
       </div>
-    </>
+    </FadeInOutWrapper>
   );
 };
 
