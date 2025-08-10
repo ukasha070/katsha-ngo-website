@@ -1,0 +1,1 @@
+const DOLLAR_IN_UGX:number =  3600
