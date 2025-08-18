@@ -2,15 +2,15 @@ import React from "react";
 import MaxWidthWrapper from "../MaxWidthWrapper";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowHead } from "../Icon";
+import { ArrowHead, Logo } from "../Icon";
 
 const FeaturedArticleCard = () => {
   return (
     <div id="feature-aritcle-40">
-      <MaxWidthWrapper className="lg:py-10 my-10 overflow-visible max-md:pb-58">
+      <MaxWidthWrapper className="my-10 overflow-visible max-md:pb-58 px-0">
         <div>
           <div className="relative w-full">
-            <div className="w-full md:w-10/12 h-[20rem] md:h-[30rem]">
+            <div className="w-full md:w-10/12 h-[20rem] md:h-[30rem] relative">
               <Image
                 src={"/background-about.webp"}
                 alt="feature-thumbnail"
@@ -18,6 +18,11 @@ const FeaturedArticleCard = () => {
                 height={500}
                 className="w-full h-full object-cover"
               />
+
+              <div className="absolute top-1/2 left-1/2 -translate-1/2 font-bold text-2xl p-4 bg-accent/30 flex items-center flex-col gap-4 just-center opacity-60">
+                <Logo />
+                <p className="text-nowrap text-black/60">Katsha Featured</p>
+              </div>
             </div>
 
             <div className="absolute top-[115%] md:top-1/2 -translate-y-1/2 max-md:left-1/2 max-md:-translate-1/2 md:right-0 p-10 bg-yellow-500 w-11/12 md:max-w-[25rem] lg:max-w-[30rem]">
@@ -33,7 +38,7 @@ const FeaturedArticleCard = () => {
                   <span>July 15 20</span>
                 </div>
 
-                <Link href={""} className="group">
+                <Link href={"/articles/name of"} className="group">
                   <h4 className="font-bold text-2xl md:text-4xl mb-5 group-hover:text-white transition-all duration-300">
                     Crisis in Gaza: What to know and how to help
                   </h4>

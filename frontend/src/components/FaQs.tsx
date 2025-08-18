@@ -1,11 +1,12 @@
 "use client";
 import React, { useState } from "react";
 
-/**
- * components
- */
-import MaxWidthWrapper from "./MaxWidthWrapper";
+//  * components
 import FaqCard from "./cards/FaqCard";
+import SectionHead from "./SectionHead";
+import CustomLink from "./buttons/CustomLink";
+import MaxWidthWrapper from "./MaxWidthWrapper";
+import { CircleQuestionMark } from "lucide-react";
 
 const faqs = [
   {
@@ -43,52 +44,44 @@ const FaQs = () => {
 
   return (
     <div>
-      <div>
-        <MaxWidthWrapper className="py-10">
-          <div className="flex flex-col lg:flex-row items-start gap-10 divide-x ">
-            <div className="w-full lg:w-4/12 pr-10">
-              <div>
-                <div className="text-xs mb-3">Insurance FAQ</div>
-
-                <h4 className="text-3xl font-bold mb-5">
-                  Frequently Asked Questions
-                </h4>
-
-                <p className="max-w-lg text-base">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Impedit eos ipsam sint unde aperiam officia labore minus
-                  possimus placeat itaque.
-                </p>
-
-                <div className="py-5">
-                  <button
-                    type="button"
-                    className="p-3 px-7 bg-yellow-500 font-semibold"
-                  >
-                    Load more
-                  </button>
-                </div>
+      <MaxWidthWrapper className="py-10">
+        <div className="flex flex-col lg:flex-row items-start gap-10 divide-x ">
+          {/* { header} */}
+          <div className="w-full lg:w-4/12 lg:pr-10 flex justify-center items-center">
+            <SectionHead
+              className="w-full mx-auto max-lg:text-center"
+              title=" Frequently Asked Questions"
+              subTitles={[
+                "Find quick, clear answers about our work, mission, and ways to get involved.",
+                "From programs to donations, our FAQ guides you — and if you need more, we’re just a message away.",
+              ]}
+            >
+              <div className="py-5">
+                <CustomLink
+                  title="I need help"
+                  href="/donate#need-help"
+                  Icon={CircleQuestionMark}
+                  className="p-3 px-7 bg-yellow-500 flex items-center justify-center gap-2 font-bold"
+                />
               </div>
-            </div>
+            </SectionHead>
+          </div>
 
-            {/**
-             * faq section
-             */}
-            <div className="w-full lg:w-8/12">
-              <div className="grid grid-cols-1 gap-5">
-                {faqs.map((faqItem, faqIndex) => (
-                  <FaqCard
-                    {...faqItem}
-                    currentFaq={currentFaq}
-                    setCurrentFaq={setCurrentFaq}
-                    key={faqIndex}
-                  />
-                ))}
-              </div>
+          {/* faq section */}
+          <div className="w-full lg:w-8/12">
+            <div className="grid grid-cols-1 gap-5">
+              {faqs.map((faqItem, faqIndex) => (
+                <FaqCard
+                  {...faqItem}
+                  currentFaq={currentFaq}
+                  setCurrentFaq={setCurrentFaq}
+                  key={faqIndex}
+                />
+              ))}
             </div>
           </div>
-        </MaxWidthWrapper>
-      </div>
+        </div>
+      </MaxWidthWrapper>
     </div>
   );
 };

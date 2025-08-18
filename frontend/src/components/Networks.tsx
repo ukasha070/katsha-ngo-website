@@ -4,13 +4,14 @@ import NetworkCard from "./cards/NetworkCard";
 import { TNetworkCardProps } from "@/lib/types";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { CalendarDays, Briefcase, GraduationCap } from "lucide-react";
+import SectionHead from "./SectionHead";
 
 export const networks: TNetworkCardProps[] = [
   {
     icon: CalendarDays,
     title: "Date Uganda",
     subtitle:
-      "Connecting people and opportunities across Uganda by providing a trusted space for networking, events, and meaningful collaborations that inspire growth and social impact.",
+      "Connecting people and opportunities across Uganda by providing a trusted space for networking, events, and meaningful collaborations that inspire growth.",
     url: "https://dateuganda.org",
     color: "#F97316", // Orange
   },
@@ -35,10 +36,33 @@ export const networks: TNetworkCardProps[] = [
 const Networks = () => {
   return (
     <div>
-      <MaxWidthWrapper className="my-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-sm:divide-y">
+      <MaxWidthWrapper className="py-12">
+        {/* { header} */}
+
+        <SectionHead
+          className="mb-5 text-center mx-auto flex flex-col gap-2 max-sm:px-6"
+          title="Our Networks"
+          subTitles={[
+            " Our networks bring together partners, organizations, and communities to share resources, expertise, and ideas. Together, we respond faster, reach farther, and create solutions that truly last.",
+            "By working hand in hand, we break barriers, amplify voices, and turn challenges into opportunities. These connections are the driving force behind lasting change.",
+          ]}
+        />
+
+        {/* {content} */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 max-sm:divide-y">
           {networks.map((networkItem, networkIndex) => (
-            <NetworkCard {...networkItem} key={networkIndex} />
+            <div
+              key={networkIndex}
+              className={`w-full
+               ${
+                 networkIndex === networks.length - 1
+                   ? "sm:col-span-2 lg:col-span-1"
+                   : ""
+               }
+              `}
+            >
+              <NetworkCard id={networkIndex} {...networkItem} />
+            </div>
           ))}
         </div>
       </MaxWidthWrapper>

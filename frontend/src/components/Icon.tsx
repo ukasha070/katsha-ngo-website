@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import React from "react";
 
 export const Logo = () => {
@@ -99,6 +100,24 @@ export const ArrowHead = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path>
+    </svg>
+  );
+};
+
+export const BlockQuote = ({ className }: { className?: string }) => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      className={cn("w-5 h-5 fill-current", className)}
+      version="1.1"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g transform="matrix(.045656 0 0 .045656 1.0426 2.8689)">
+        <path d="m216 230.86v-230.86h-216v400h38.4z" />
+        <path d="m264 400h38.4l177.6-169.14v-230.86h-216z" />
+      </g>
     </svg>
   );
 };

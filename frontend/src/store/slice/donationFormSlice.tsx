@@ -6,6 +6,9 @@ interface donationFormVisibleState {
 
 const initialState: donationFormVisibleState = {
   isOpen: false,
+  // form: {
+
+  // }
 };
 const donationFormSlice = createSlice({
   name: "donationForm",

@@ -1,26 +1,36 @@
+import type { Metadata } from "next";
+
 /**
  * features articles
  */
-
-import ContactInfo from "@/components/ContactInfo";
 import FaQs from "@/components/FaQs";
-import Hero from "@/components/Hero";
+import Hero from "@/components/hero/Hero";
 import Networks from "@/components/Networks";
-import OurSponsor from "@/components/OurSponsor";
-import OurTearm from "@/components/OurTearm";
+import ContactInfo from "@/components/ContactInfo";
+import TopArticles from "@/components/TopArticles";
 import Testimonials from "@/components/Testimonials";
-import PeopleSay from "@/components/cards/PeopleSay";
+import Articles from "@/components/page-components/home/Articles";
+import HomeAbout from "@/components/page-components/home/HomeAbout";
+// import Newsletter from "@/components/forms/Newsletter";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description: "",
+};
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <OurSponsor />
+
       <Networks />
+      <Articles />
       <FaQs />
       <Testimonials />
-      <PeopleSay />
-      <OurTearm />
+      <HomeAbout />
+      {/* <Newsletter /> */}
+      <ContactInfo />
+      <TopArticles />
     </>
   );
 }

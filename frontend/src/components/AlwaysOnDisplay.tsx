@@ -1,14 +1,21 @@
+"use client";
 import React from "react";
-import AppSidebar from "./AppSidebar";
+
+// components
+import AppSidebar from "./header/AppSidebar";
 import SearchForm from "./forms/SearchForm";
-import DonationForm from "./forms/DonationForm";
+import ScrollToTopBtn from "./buttons/ScrollToTopBtn";
+
+// hooks
+import { useScrollToHash } from "@/hooks/useScrollToHash";
 
 const AlwaysOnDisplay = () => {
+  useScrollToHash();
   return (
     <>
       <AppSidebar />
       <SearchForm />
-      <DonationForm />
+      <ScrollToTopBtn />
     </>
   );
 };

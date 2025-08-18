@@ -1,5 +1,6 @@
-import { User2 } from "lucide-react";
 import React from "react";
+import { BlockQuote } from "../Icon";
+import Link from "next/link";
 
 type TTestimonialCardProps = {
   profile_link: string;
@@ -11,27 +12,35 @@ type TTestimonialCardProps = {
 
 const TestimonialCard = (props: TTestimonialCardProps) => {
   return (
-    <div className="text-sm leading-6">
-      <div className="relative group">
-        <a href={props.profile_link} className="cursor-pointer">
-          <div className="relative p-6 space-y-6 leading-none bg-accent">
-            <div className="flex items-center space-x-4">
-              <img
-                src={props.photo ?? "/user-icon.png"}
-                className="w-12 h-12 bg-center bg-cover border rounded-full"
-                alt={props.name}
-              />
-
-              <div>
-                <h3 className="text-lg font-semibold leading-9">
-                  {props.name}
-                </h3>
-                <p className="text-gray-500 text-md">{props.job_title}</p>
-              </div>
-            </div>
-            <p className="leading-normal  text-md">{props.content}</p>
+    <div>
+      <div className="flex flex-col mx-wuto max-w-md">
+        {/* {content} */}
+        <div className="px-4 py-12 sm:px-8 md:px-12 relative">
+          <div className="absolute top-1 -z-10">
+            <BlockQuote className="fill-accent size-20 " />
           </div>
-        </a>
+
+          <p className="text-lg italic text-center ">{props.content}</p>
+
+          <div className="absolute -bottom-4 right-2 rotate-180 -z-10">
+            <BlockQuote className="fill-accent size-20" />
+          </div>
+        </div>
+
+        <div>
+          <Link
+            href={props.profile_link}
+            className="flex flex-col items-center justify-center p-8 bg-yellow-500 group transition-all duration-300 hover:bg-transparent"
+          >
+            <img
+              src={props.photo ?? "/user-icon.png"}
+              alt={props.name}
+              className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover"
+            />
+            <p className="text-xl font-semibold leading-tight">{props.name}</p>
+            <p className="text-sm">{props.job_title}</p>
+          </Link>
+        </div>
       </div>
     </div>
   );

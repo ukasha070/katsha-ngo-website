@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
 import { ArrowHead } from "../Icon";
-import MaxWidthWrapper from "../MaxWidthWrapper";
 import Link from "next/link";
 
 const ArticleCard = () => {
@@ -18,20 +17,20 @@ const ArticleCard = () => {
           />
         </div>
 
-        <div className="w-9/10 -mt-[4rem] p-5 bg-yellow-500 group">
+        <div className="w-9/10 -mt-[4rem]  p-5 sm:p-6 bg-yellow-500 group">
           <div>
             <div
               id="location"
-              className="mb-5 flex items-center gap-3 divide-x"
+              className="mb-5 flex items-center gap-3 divide-x text-sm"
             >
               <span className="font-semibold block pr-3">Kampala Uganda</span>
 
               <span>July 15 20</span>
             </div>
 
-            <Link href={""} className="cursor-pointer">
+            <Link href={"/articles/name of"} className="cursor-pointer">
               <div className="group-hover:text-white transition-all duration-300 flex items-start mb-3 ">
-                <h4 className="font-bold text-lg line-clamp-2">
+                <h4 className="font-bold text-lg line-clamp-20 leading-tight">
                   Crisis in Gaza: What to know and how to help
                 </h4>
                 <ArrowHead />
@@ -50,15 +49,3 @@ const ArticleCard = () => {
 };
 
 export default ArticleCard;
-
-export const Articles = () => {
-  return (
-    <MaxWidthWrapper>
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
-        {Array.from({ length: 3 }).map((_, i) => (
-          <ArticleCard key={i} />
-        ))}
-      </div>
-    </MaxWidthWrapper>
-  );
-};

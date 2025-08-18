@@ -1,57 +1,62 @@
 "use client";
-import React from "react";
-/**
- * components
- */
-import { X } from "lucide-react";
-import { useStore } from "@/hooks/useStore";
+import React, { FormEvent } from "react";
+import { useRouter } from "next/navigation";
+// components
 import CustomBtn from "../buttons/CustomBtn";
 import MaxWidthWrapper from "../MaxWidthWrapper";
-import FadeInOutWrapper from "../FadeInOutWrapper";
 import { closeSearchForm, setSearchQs } from "@/store/slice/searchFormSlice";
+import { closeSidebar } from "@/store/slice/appSidebarSlice";
+
+// utils
+import { sanitizeSearchQuery } from "@/lib/utils";
+
+// hooks
+import { useStore } from "@/hooks/useStore";
 
 const SearchForm = () => {
-  const { state, dispatch } = useStore();
+  const state = useStore().searchBoxState;
+  const dispatch = useStore().dispatch;
+
+  const router = useRouter();
+
+  function onSubmit(e: FormEvent) {
+    e.preventDefault();
+
+    const qs = sanitizeSearchQuery(state.searchQs);
+    router.push(`/articles?search=${qs}`);
+    dispatch(closeSearchForm());
+    dispatch(closeSidebar());
+  }
 
   return (
-    <FadeInOutWrapper isVisible={state.searchForm.isOpen}>
+    state.isOpen && (
       <div>
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-md flex items-start justify-center z-50">
-          <div className="relative w-full">
-            <MaxWidthWrapper className="max-w-11/12 lg:max-w-7/12 w-full mt-42">
-              <form action="" className="w-full">
-                <div className="form-input-container mb-4">
-                  <input
-                    type="text"
-                    name="search"
-                    value={state.searchForm.searchQs}
-                    onChange={(e) => dispatch(setSearchQs(e.target.value))}
-                    className="font-bold text-3xl h-fit border-b-2 oultine-none w-full p-5 outline-none"
-                    placeholder="Search for Articles, Blogs ..."
-                  />
-                </div>
-                <CustomBtn
-                  type="submit"
-                  className="h-fit bg-white p-4 px-6 font-semibold"
-                >
-                  <span>Search Now</span>
-                </CustomBtn>
-              </form>
-            </MaxWidthWrapper>
-
-            <div className="absolute top-10 right-10">
-              <CustomBtn
-                type="button"
-                onClick={() => dispatch(closeSearchForm())}
-                className="p-3 bg-white rounded-md"
-              >
-                <X />
-              </CustomBtn>
+        <div
+          className="overlay-container"
+          onClick={() => dispatch(closeSearchForm())}
+        />
+        <MaxWidthWrapper className="fixed max-w-xl top-4/12 md:top-1/2 left-1/2 -translate-1/2 z-60 w-full">
+          <form onSubmit={onSubmit} className="w-full">
+            <div className="form-input-container mb-4 bg-accent">
+              <input
+                type="text"
+                name="search"
+                value={state.searchQs}
+                onChange={(e) => dispatch(setSearchQs(e.target.value))}
+                className="font-bold text-3xl h-fit border-b-2 oultine-none w-full p-5 outline-none"
+                placeholder="Search for Articles, Blogs ..."
+              />
             </div>
-          </div>
-        </div>
+            <CustomBtn
+              type="submit"
+              className="h-fit bg-yellow-500 w-full sm:w-fit p-4 px-6 font-semibold"
+            >
+              <span>Search Now</span>
+            </CustomBtn>
+          </form>
+        </MaxWidthWrapper>
       </div>
-    </FadeInOutWrapper>
+    )
   );
 };
 

@@ -18,7 +18,7 @@ type PaginationProps = {
   paginationItemsToDisplay?: number;
 };
 
-export default function Component({
+export default function PaginationBtn({
   currentPage,
   totalPages,
   paginationItemsToDisplay = 5,
@@ -40,7 +40,7 @@ export default function Component({
             {/* Previous page button */}
             <PaginationItem>
               <PaginationLink
-                className="aria-disabled:pointer-events-none aria-disabled:opacity-50"
+                className="aria-disabled:pointer-events-none aria-disabled:opacity-50 w-fit bg-accent ring ring-black/20 pr-5 pl-3 h-12 "
                 href={
                   currentPage === 1 ? undefined : `#/page/${currentPage - 1}`
                 }
@@ -49,12 +49,13 @@ export default function Component({
                 role={currentPage === 1 ? "link" : undefined}
               >
                 <ChevronLeftIcon size={16} aria-hidden="true" />
+                <p>Back</p>
               </PaginationLink>
             </PaginationItem>
 
             {/* Left ellipsis (...) */}
             {showLeftEllipsis && (
-              <PaginationItem>
+              <PaginationItem className="max-xs:hidden">
                 <PaginationEllipsis />
               </PaginationItem>
             )}
@@ -73,7 +74,7 @@ export default function Component({
 
             {/* Right ellipsis (...) */}
             {showRightEllipsis && (
-              <PaginationItem>
+              <PaginationItem className="max-xs:hidden">
                 <PaginationEllipsis />
               </PaginationItem>
             )}
@@ -81,7 +82,7 @@ export default function Component({
             {/* Next page button */}
             <PaginationItem>
               <PaginationLink
-                className="aria-disabled:pointer-events-none aria-disabled:opacity-50"
+                className="aria-disabled:pointer-events-none aria-disabled:opacity-50 w-fit bg-accent ring ring-black/20 pl-5 pr-3 h-12 "
                 href={
                   currentPage === totalPages
                     ? undefined
@@ -91,6 +92,7 @@ export default function Component({
                 aria-disabled={currentPage === totalPages ? true : undefined}
                 role={currentPage === totalPages ? "link" : undefined}
               >
+                <span>Next</span>
                 <ChevronRightIcon size={16} aria-hidden="true" />
               </PaginationLink>
             </PaginationItem>
@@ -99,7 +101,7 @@ export default function Component({
       </div>
 
       {/* Go to page input */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 max-sm:hidden">
         <Label htmlFor={id} className="whitespace-nowrap">
           Go to page
         </Label>

@@ -1,14 +1,11 @@
 import React from "react";
 import Link from "next/link";
 
-/**
- * utils
- */
+// components
 import MaxWidthWrapper from "./MaxWidthWrapper";
 
-/**
- * constants
- */
+// constants
+import { footerLinks } from "@/lib/contants";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -27,7 +24,7 @@ const Footer = () => {
                     difference.
                   </p>
                   <Link
-                    href={""}
+                    href={"/#newsletter"}
                     className="font-semibold underline text-base mt-1 block"
                   >
                     Subscribe
@@ -62,28 +59,13 @@ const Footer = () => {
               </div>
               <div>
                 <ul className="flex items-center flex-wrap gap-2 divide-x divide-white/40">
-                  <li className="pr-2">
-                    <Link href={""}>FaQs</Link>
-                  </li>
-                  <li className="pr-2">
-                    <Link href={""}>Donate to us</Link>
-                  </li>
-
-                  <li className="pr-2">
-                    <Link href={""}>About Us</Link>
-                  </li>
-
-                  <li className="pr-2">
-                    <Link href={""}>
-                      <span>Your Privacy</span>
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link href={""}>
-                      <span>Terms and Conditions</span>
-                    </Link>
-                  </li>
+                  {footerLinks.map((footerLinkItem, footerLinkIndex) => (
+                    <li className="pr-2" key={footerLinkIndex}>
+                      <Link href={footerLinkItem.href}>
+                        <span>{footerLinkItem.name}</span>
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

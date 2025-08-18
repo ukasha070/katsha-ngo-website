@@ -3,7 +3,7 @@ import React from "react";
 /**
  * components
  */
-import Loader from "../Loader";
+import Spinner from "../Spinner";
 
 /**
  * utils
@@ -35,7 +35,7 @@ const CustomBtn = ({
 
       {loading && (
         <div className="w-5 h-5 aspect-square">
-          <Loader className="border-3" />
+          <Spinner className="border-3" />
         </div>
       )}
     </button>

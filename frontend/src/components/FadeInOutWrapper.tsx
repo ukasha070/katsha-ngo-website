@@ -1,7 +1,8 @@
 "use client";
-import React from "react";
 
+import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 type TFadeInOutProps = {
   isVisible: boolean;
@@ -13,18 +14,19 @@ type TFadeInOutProps = {
 const FadeInOutWrapper = ({
   isVisible,
   children,
-  duration = 0.05,
+  duration = 0.01,
   className,
 }: TFadeInOutProps) => {
   return (
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className={className}
+          className={cn("z-100", className)}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration }}
+          style={{ display: "block" }}
         >
           {children}
         </motion.div>

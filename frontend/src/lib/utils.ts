@@ -1,8 +1,8 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 export function splitIntoThreeLists<T>(inputList: T[]): T[][] {
@@ -26,7 +26,6 @@ export function splitIntoThreeLists<T>(inputList: T[]): T[][] {
   return [list1, list2, list3];
 }
 
-
 // ** Split words into `n` balanced chunks (greedy, preserves words). */
 export function splitIntoNChunks(text: string, n: number): string[] {
   if (!text || n <= 1) return [text.trim()];
@@ -35,18 +34,18 @@ export function splitIntoNChunks(text: string, n: number): string[] {
   if (words.length <= n) return words; // one word per chunk if fewer words than chunks
 
   // target length per chunk (characters)
-  const totalLen = words.join(' ').length;
+  const totalLen = words.join(" ").length;
   const target = Math.ceil(totalLen / n);
 
   const chunks: string[] = [];
-  let current = '';
+  let current = "";
 
   for (const w of words) {
     // if adding the next word would push us past target and we still have
     // room to create more chunks, then seal the current chunk.
     if (
       current.length > 0 &&
-      (current.length + 1 + w.length > target) &&
+      current.length + 1 + w.length > target &&
       chunks.length < n - 1
     ) {
       chunks.push(current);
@@ -68,7 +67,7 @@ export function splitIntoNChunks(text: string, n: number): string[] {
   // If fewer, create empty-ish chunks by moving words from end
   while (chunks.length < n) {
     // take last chunk and split it one word off
-    const last = chunks.pop() || '';
+    const last = chunks.pop() || "";
     const parts = last.split(/\s+/);
     if (parts.length <= 1) {
       // if can't split, just push back
@@ -76,16 +75,19 @@ export function splitIntoNChunks(text: string, n: number): string[] {
       break;
     }
     const take = parts.pop() as string;
-    chunks.push(parts.join(' '));
+    chunks.push(parts.join(" "));
     chunks.push(take);
   }
 
-  return chunks.map(c => c.trim());
+  return chunks.map((c) => c.trim());
 }
 
 /** Decide how many chunks to split into based on length. Configurable thresholds. */
-export function chooseChunkCount(text: string, opts?: { t2?: number; t3?: number }): number {
-  const len = (text || '').trim().length;
+export function chooseChunkCount(
+  text: string,
+  opts?: { t2?: number; t3?: number }
+): number {
+  const len = (text || "").trim().length;
   // defaults (t2 = up to this length -> 2; up to t3 -> 3; else 4)
   const t2 = opts?.t2 ?? 30; // e.g. short lines -> 2
   const t3 = opts?.t3 ?? 70; // medium lines -> 3
@@ -95,10 +97,59 @@ export function chooseChunkCount(text: string, opts?: { t2?: number; t3?: number
   return 4;
 }
 
-
-
-export function splitAuto(text: string, opts?: { t2?: number; t3?: number }): string[] {
+export function splitAuto(
+  text: string,
+  opts?: { t2?: number; t3?: number }
+): string[] {
   const n = chooseChunkCount(text, opts);
   return splitIntoNChunks(text, n);
 }
 
+export function formatCurrency(
+  amount: number,
+  currency: "USD" | "EUR" | "GBP" | "UGX",
+  locale = "en-US"
+): string {
+  // Map UGX to its locale if needed
+  const localeMap: Record<string, string> = {
+    USD: "en-US",
+    EUR: "de-DE", // or "en-IE" or "fr-FR" depending on preference
+    GBP: "en-GB",
+    UGX: "en-UG", // Uganda English locale
+  };
+
+  const formatter = new Intl.NumberFormat(localeMap[currency] || locale, {
+    style: "currency",
+    currency,
+    minimumFractionDigits: 0, // UGX usually has no decimals
+    maximumFractionDigits: 2,
+  });
+
+  return formatter.format(amount);
+}
+
+export function formatNumber(num: number) {
+  if (num >= 1_000_000) return (num / 1_000_000).toFixed(1) + "M";
+  if (num >= 1_000) return (num / 1_000).toFixed(1) + "k";
+  return num.toString();
+}
+
+export function sanitizeSearchQuery(query: string, encode = true): string {
+  if (!query) return "";
+
+  // 1. Trim whitespace
+  let sanitized = query.trim();
+
+  // 2. Remove control chars & special symbols that are unsafe
+  sanitized = sanitized.replace(/[<>;{}$]/g, "");
+
+  // 3. Collapse multiple spaces
+  sanitized = sanitized.replace(/\s+/g, " ");
+
+  // 4. Optionally URL-encode
+  if (encode) {
+    sanitized = encodeURIComponent(sanitized);
+  }
+
+  return sanitized;
+}

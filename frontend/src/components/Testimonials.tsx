@@ -1,20 +1,31 @@
-import React from "react";
+"use client";
 
-/**
- * utils
- */
-import { splitIntoThreeLists } from "@/lib/utils";
+import React from "react";
 
 /**
  * component
  */
+import Link from "next/link";
+import SectionHead from "./SectionHead";
+import { PlusSquare } from "lucide-react";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import TestimonialCard from "./cards/TestimonialCard";
 
+import GenericCarousel from "./GenericCarousel";
+import { CarouselItem } from "./ui/carousel";
+
 const testimonials = [
   {
+    profile_link: "https://example.com/profile3",
+    photo: "/user5.webp",
+    name: "Alice Johnson",
+    job_title: "UX Designer",
+    content:
+      "Working with this team was a game-changer for my project. Their creative insights and attention to detail helped bring my vision to life. I appreciated their collaborative approach and how they incorporated my feedback throughout the design process.",
+  },
+  {
     profile_link: "https://example.com/profile1",
-    photo: "/images/photo1.png",
+    photo: "/user-icon.png",
     name: "John Doe",
     job_title: "Software Engineer",
     content:
@@ -22,20 +33,13 @@ const testimonials = [
   },
   {
     profile_link: "https://example.com/profile2",
-    photo: "/images/photo2.png",
+    photo: "/user2.webp",
     name: "Jane Smith",
     job_title: "Product Manager",
     content:
       "An excellent experience from start to finish. The professionalism and expertise displayed by the team were remarkable.",
   },
-  {
-    profile_link: "https://example.com/profile3",
-    photo: "/images/photo3.png",
-    name: "Alice Johnson",
-    job_title: "UX Designer",
-    content:
-      "Working with this team was a game-changer for my project. Their creative insights and attention to detail helped bring my vision to life. I appreciated their collaborative approach and how they incorporated my feedback throughout the design process.",
-  },
+
   {
     profile_link: "https://example.com/profile4",
     photo: null,
@@ -55,35 +59,42 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
-  const [col1, col2, col3] = splitIntoThreeLists(testimonials);
-
   return (
-    <div>
-      <MaxWidthWrapper>
-        <div className="relative">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8 pt-5 pb-20 -z-10">
-            {[col1, col3, col2].map((col, i) => (
-              <div key={i} className="space-y-8">
-                {col.map((testimonialItem, testimonialIndex) => (
-                  <TestimonialCard
-                    key={testimonialIndex}
-                    {...testimonialItem}
-                  />
-                ))}
-              </div>
-            ))}
-          </div>
-
-          <div className="relative">
-            <div className="absolute w-full h-28 bg-gradient-to-t from-black/40 via-black/20 to-transparent -mt-[8rem] flex items-center justify-center">
-              <button type="button">
-                <p className="p-3 px-8 bg-yellow-500 font-bold">Load More</p>
-              </button>
+    <section>
+      <div className="my-12">
+        <MaxWidthWrapper>
+          <SectionHead
+            className="justify-center items-center mx-auto text-center"
+            title="Testimonials"
+            subTitles={[
+              "Hear real stories from people whose lives and communities have been touched by our work.",
+              "Your voice matters. If our work has made a difference in your life or community, you can add your own testimony today and inspire others to join the cause.",
+            ]}
+          >
+            <div className="mt-3 w-fit">
+              <Link
+                href={""}
+                className="bg-yellow-500 flex gap-2 items-center p-3 px-5"
+              >
+                <p className="font-bold">Testify</p>
+                <PlusSquare className="size-4" />
+              </Link>
             </div>
-          </div>
-        </div>
-      </MaxWidthWrapper>
-    </div>
+          </SectionHead>
+
+          <GenericCarousel contentClassName="items-end">
+            {testimonials.map((testimonialItem, testimonialIndex) => (
+              <CarouselItem
+                className="w-full basis-full md:basis-1/2 lg:basis-1/3 flex justify-center ml-7"
+                key={testimonialIndex}
+              >
+                <TestimonialCard {...testimonialItem} />
+              </CarouselItem>
+            ))}
+          </GenericCarousel>
+        </MaxWidthWrapper>
+      </div>
+    </section>
   );
 };
 

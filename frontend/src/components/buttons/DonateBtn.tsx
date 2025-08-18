@@ -7,14 +7,13 @@ import React from "react";
  */
 import { cn } from "@/lib/utils";
 import { Heart } from "lucide-react";
-import { openDonationForm } from "@/store/slice/donationFormSlice";
 
 /**
  * store
  */
-import { useStore } from "@/hooks/useStore";
+import Link from "next/link";
 
-type propsType = React.ComponentPropsWithoutRef<"button"> & {
+type propsType = React.ComponentPropsWithoutRef<"a"> & {
   children?: React.ReactNode;
   innderClass?: string;
 };
@@ -25,12 +24,13 @@ const DonateBtn = ({
   innderClass,
   ...props
 }: propsType) => {
-  const { _, dispatch } = useStore();
   return (
-    <button
-      type="button"
-      onClick={() => dispatch(openDonationForm())}
-      className={cn("h-12 rounded-lg w-full px-4 bg-yellow-500", className)}
+    <Link
+      href="/donate"
+      className={cn(
+        "h-12 rounded-lg w-full flex items-center px-4 bg-yellow-500",
+        className
+      )}
       {...props}
     >
       <div
@@ -41,10 +41,10 @@ const DonateBtn = ({
       >
         <span className="font-bold">Donate</span>
 
-        <Heart className="size-4 stroke-3" />
+        <Heart className="size-5 stroke-0 stroke-none fill-red-700 animate-heartbeat" />
       </div>
       {children}
-    </button>
+    </Link>
   );
 };
 

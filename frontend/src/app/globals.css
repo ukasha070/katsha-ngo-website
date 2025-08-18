@@ -128,11 +128,55 @@
     @apply text-yellow-500 font-black;
   }
 
+  .form-input-container {
+    @apply relative mb-3 flex items-center justify-start
+  }
+
   .form-input {
-    @apply w-full h-16 py-2 border px-4 rounded-xl outline-none focus:outline-1 focus:outline-black/50 mb-3 block;
+    @apply w-full h-16 py-2 border px-4 rounded-xl outline-none focus:outline-1 focus:outline-black/50  block;
+  }
+
+  .form-input-error-container {
+    @apply text-sm  p-1 pt-2
+  }
+
+  .form-input-error-container p {
+    @apply text-red-500
   }
 
   .overlay-container {
-    @apply fixed top-0 right-0 left-0  min-w-screen h-screen overflow-y-auto z-50  bg-black/50 backdrop-blur flex items-center justify-center;
+    @apply cursor-pointer fixed top-0 right-0 left-0  min-w-screen h-screen overflow-y-auto z-50  bg-black/50 backdrop-blur flex items-center justify-center;
   }
+
+  button:disabled {
+    @apply opacity-60
+  }
+}
+
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  25% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  75% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 2s infinite;
 }

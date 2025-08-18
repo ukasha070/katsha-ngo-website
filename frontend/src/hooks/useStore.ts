@@ -2,8 +2,9 @@ import { useAppDispatch, useAppSelector } from "./hook";
 import type { RootState } from "../store/store";
 
 export function useStore() {
-  const state: RootState = useAppSelector((s) => s);
+  const appSidebarState = useAppSelector((s: RootState) => s.appSidebar);
+  const searchBoxState = useAppSelector((s: RootState) => s.searchForm);
   const dispatch = useAppDispatch();
 
-  return { state, dispatch };
+  return { appSidebarState, searchBoxState, dispatch };
 }

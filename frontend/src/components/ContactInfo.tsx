@@ -36,7 +36,7 @@ const contactData = [
 const ContactInfo: React.FC = () => {
   return (
     <div>
-      <MaxWidthWrapper className="my-10">
+      <MaxWidthWrapper className="my-12">
         <div>
           <div className="grid w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {contactData.map((contactInfo, contactInfoIndex: number) => (
