@@ -9,7 +9,7 @@ import CustomLink from "@/components/buttons/CustomLink";
 const NeedHelp = () => {
   return (
     <div id="need-help">
-      <MaxWidthWrapper className="mb-16">
+      <MaxWidthWrapper className="my-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="md:col-span-1">
             <div className="flex flex-col gap-2">
@@ -22,7 +22,7 @@ const NeedHelp = () => {
               />
 
               <CustomLink
-                href={"/donate/need-help"}
+                href={"/get-help"}
                 Icon={File}
                 title="Fill Form"
                 className="w-full py-2.5 flex items-center gap-3 mb-4 text-center justify-center"

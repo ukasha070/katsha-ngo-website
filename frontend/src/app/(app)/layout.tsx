@@ -5,10 +5,8 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/header/Navbar";
 import AlwaysOnDisplay from "@/components/AlwaysOnDisplay";
 
-/**
- * store
- */
-import { Providers } from "@/store/Provider";
+// utils
+import { Providers } from "@/lib/Provider";
 
 export default function AppLayout({
   children,
@@ -19,7 +17,7 @@ export default function AppLayout({
     <>
       <Providers>
         <Navbar />
-        {children}
+        <main>{children}</main>
         <Footer />
         <AlwaysOnDisplay />
       </Providers>

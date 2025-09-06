@@ -30,7 +30,7 @@ const TestimonialCard = (props: TTestimonialCardProps) => {
         <div>
           <Link
             href={props.profile_link}
-            className="flex flex-col items-center justify-center p-8 bg-yellow-500 group transition-all duration-300 hover:bg-transparent"
+            className="flex flex-col items-center justify-center p-8 bg-yellow-600 hover:bg-yellow-500 group transition-all duration-300"
           >
             <img
               src={props.photo ?? "/user-icon.png"}

@@ -1,5 +1,10 @@
-import { useId } from "react";
+"use client";
+
+import { useState } from "react";
+
+import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { useId } from "react";
 
 import { usePagination } from "@/hooks/use-pagination";
 import { Input } from "@/components/ui/input";
@@ -21,9 +26,11 @@ type PaginationProps = {
 export default function PaginationBtn({
   currentPage,
   totalPages,
-  paginationItemsToDisplay = 5,
+  paginationItemsToDisplay = 3,
 }: PaginationProps) {
   const id = useId();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const { pages, showLeftEllipsis, showRightEllipsis } = usePagination({
     currentPage,
@@ -31,85 +38,88 @@ export default function PaginationBtn({
     paginationItemsToDisplay,
   });
 
+  const goToPage = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", String(page));
+    router.push(`?${params.toString()}`); // updates the URL
+  };
+
   return (
     <div className="flex items-center justify-between gap-4">
-      {/* Pagination */}
       <div>
         <Pagination>
-          <PaginationContent>
-            {/* Previous page button */}
+          <PaginationContent className="sm:gap-3">
+            {/* Prev */}
             <PaginationItem>
               <PaginationLink
-                className="aria-disabled:pointer-events-none aria-disabled:opacity-50 w-fit bg-accent ring ring-black/20 pr-5 pl-3 h-12 "
-                href={
-                  currentPage === 1 ? undefined : `#/page/${currentPage - 1}`
-                }
-                aria-label="Go to previous page"
-                aria-disabled={currentPage === 1 ? true : undefined}
-                role={currentPage === 1 ? "link" : undefined}
+                onClick={() => currentPage > 1 && goToPage(currentPage - 1)}
+                aria-disabled={currentPage === 1}
+                className={`cursor-pointer aria-disabled:pointer-events-none aria-disabled:opacity-50 w-fit bg-accent ring ring-black/20 pr-5 pl-3 h-12`}
               >
-                <ChevronLeftIcon size={16} aria-hidden="true" />
+                <ChevronLeftIcon size={16} />
                 <p>Back</p>
               </PaginationLink>
             </PaginationItem>
 
-            {/* Left ellipsis (...) */}
             {showLeftEllipsis && (
-              <PaginationItem className="max-xs:hidden">
+              <PaginationItem>
                 <PaginationEllipsis />
               </PaginationItem>
             )}
 
-            {/* Page number links */}
             {pages.map((page) => (
               <PaginationItem key={page}>
                 <PaginationLink
-                  href={`#/page/${page}`}
+                  onClick={() => goToPage(page)}
                   isActive={page === currentPage}
+                  className="cursor-pointer"
                 >
                   {page}
                 </PaginationLink>
               </PaginationItem>
             ))}
 
-            {/* Right ellipsis (...) */}
             {showRightEllipsis && (
-              <PaginationItem className="max-xs:hidden">
+              <PaginationItem>
                 <PaginationEllipsis />
               </PaginationItem>
             )}
 
-            {/* Next page button */}
+            {/* Next */}
             <PaginationItem>
               <PaginationLink
-                className="aria-disabled:pointer-events-none aria-disabled:opacity-50 w-fit bg-accent ring ring-black/20 pl-5 pr-3 h-12 "
-                href={
-                  currentPage === totalPages
-                    ? undefined
-                    : `#/page/${currentPage + 1}`
+                onClick={() =>
+                  currentPage < totalPages && goToPage(currentPage + 1)
                 }
-                aria-label="Go to next page"
-                aria-disabled={currentPage === totalPages ? true : undefined}
-                role={currentPage === totalPages ? "link" : undefined}
+                aria-disabled={currentPage === totalPages}
+                className={`aria-disabled:pointer-events-none aria-disabled:opacity-50 w-fit bg-accent ring ring-black/20 pl-5 pr-3 h-12 cursor-pointer`}
               >
                 <span>Next</span>
-                <ChevronRightIcon size={16} aria-hidden="true" />
+                <ChevronRightIcon size={16} />
               </PaginationLink>
             </PaginationItem>
           </PaginationContent>
         </Pagination>
       </div>
 
-      {/* Go to page input */}
+      {/* Jump to page */}
       <div className="flex items-center gap-3 max-sm:hidden">
-        <Label htmlFor={id} className="whitespace-nowrap">
-          Go to page
-        </Label>
+        <Label htmlFor={id}>Go to page</Label>
         <Input
           id={id}
-          type="text"
-          className="w-14"
+          type="number"
+          min={1}
+          max={totalPages}
           defaultValue={String(currentPage)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              const value = Number((e.target as HTMLInputElement).value);
+              if (value >= 1 && value <= totalPages) {
+                goToPage(value);
+              }
+            }
+          }}
+          className="w-14"
         />
       </div>
     </div>

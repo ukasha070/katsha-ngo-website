@@ -1,21 +1,22 @@
+import GenericCarousel from "@/components/GenericCarousel";
+import JoinCommunity from "@/components/JoinCommunity";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import SectionHead from "@/components/SectionHead";
-import TickerWrapper from "@/components/TickerWrapper";
 import { CommunityMemberCard } from "@/components/cards/CommunityMemberCard";
 import React from "react";
 
 const members = [
   { name: "Jane Doe", image: "/founder.webp", profileUrl: "/profile/jane" },
   {
-    name: "John Smith",
-    image: "/usama.webp",
+    name: "Mugoya Joshep",
+    image: "/community/katumba-joshua.png",
     profileUrl: "/profile/john",
   },
 ];
 
 export default function CommunityMembersContainer() {
   return (
-    <MaxWidthWrapper className="py-10">
+    <MaxWidthWrapper className="overflow-visible">
       <div>
         <SectionHead
           className="text-center justify-center mx-auto"
@@ -25,37 +26,24 @@ export default function CommunityMembersContainer() {
           ]}
         />
 
-        <div className="flex flex-col">
-          <TickerWrapper direction="left">
-            {Array.from({ length: 10 }).map((_, idx) =>
-              members.map((member, idx) => (
-                <CommunityMemberCard
-                  key={idx}
-                  name={member.name}
-                  image={member.image}
-                  profileUrl={member.profileUrl}
-                />
-              ))
-            )}
-          </TickerWrapper>
+        <GenericCarousel
+          autoplayDelay={2500}
+          contentClassName="flex items-center gap-4 py-10"
+          className="overflow-visible"
+        >
+          {Array.from({ length: 10 }).map((_, idx) =>
+            members.map((member, idx) => (
+              <CommunityMemberCard
+                key={idx}
+                name={member.name}
+                image={member.image}
+                profileUrl={member.profileUrl}
+              />
+            ))
+          )}
+        </GenericCarousel>
 
-          <TickerWrapper direction="right">
-            {Array.from({ length: 10 }).map((_, idx) =>
-              members.map((member, idx) => (
-                <CommunityMemberCard
-                  key={idx}
-                  name={member.name}
-                  image={member.image}
-                  profileUrl={member.profileUrl}
-                />
-              ))
-            )}
-          </TickerWrapper>
-        </div>
-
-        <div className="text-center w-fit mx-auto py-4 font-semibold text-lg">
-          <p>400/3000 Members</p>
-        </div>
+        <JoinCommunity />
       </div>
     </MaxWidthWrapper>
   );

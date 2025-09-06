@@ -153,3 +153,22 @@ export function sanitizeSearchQuery(query: string, encode = true): string {
 
   return sanitized;
 }
+
+
+export function splitByComma(input: string): string[] {
+  return input
+    .split(",") // split by comma
+    .map((item) => item.trim()) // remove extra spaces
+    .filter((item) => item.length > 0); // remove empty strings
+}
+
+export function getImageSrc(html: string): string {
+
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+
+  const img = doc.querySelector("img");
+
+  return img?.getAttribute("src") ??  "/background-about.webp"
+}

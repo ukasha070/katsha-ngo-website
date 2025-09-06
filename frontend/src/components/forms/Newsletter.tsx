@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 import z from "zod";
@@ -26,7 +28,7 @@ const Newsletter = () => {
     console.log(data);
   }
   return (
-    <div id="newsletter">
+    <div id="newsletter-form">
       <MaxWidthWrapper className="my-12">
         <div className="h-fit w-full flex flex-col md:flex-row items-start md:items-end justify-start">
           <div className="w-11/12 md:w-6/12 lg:w-5/12 max-md:-mb-[6rem]">
@@ -36,7 +38,7 @@ const Newsletter = () => {
                   Receive email updates
                 </h3>
 
-                <p>
+                <p className="text-black/60">
                   LFor nearly 90 years, the IRC has responded to the world's
                   worst humanitarian crises and helped people to survive and
                   rebuild their lives
@@ -49,6 +51,7 @@ const Newsletter = () => {
                     type="text"
                     {...form.register("preffered_name")}
                     className="form-input"
+                    placeholder="Preffered Name"
                   />
                   {errors.preffered_name && (
                     <p className="text-red-500 text-sm mt-1">
@@ -60,7 +63,7 @@ const Newsletter = () => {
                 <div className="form-input-contaner mb-4">
                   <input
                     type="mail"
-                    placeholder="ukasha@mail.com"
+                    placeholder="ukasha@gmail.com"
                     {...form.register("email")}
                     className="form-input"
                   />

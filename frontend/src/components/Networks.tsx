@@ -36,15 +36,14 @@ export const networks: TNetworkCardProps[] = [
 const Networks = () => {
   return (
     <div>
-      <MaxWidthWrapper className="py-12">
+      <MaxWidthWrapper className="py-12 overflow-visible">
         {/* { header} */}
 
         <SectionHead
-          className="mb-5 text-center mx-auto flex flex-col gap-2 max-sm:px-6"
+          className="mb-12 text-center mx-auto flex flex-col gap-2 max-sm:px-6"
           title="Our Networks"
           subTitles={[
-            " Our networks bring together partners, organizations, and communities to share resources, expertise, and ideas. Together, we respond faster, reach farther, and create solutions that truly last.",
-            "By working hand in hand, we break barriers, amplify voices, and turn challenges into opportunities. These connections are the driving force behind lasting change.",
+            " A growing ecosystem of platforms designed to empower communities.",
           ]}
         />
 

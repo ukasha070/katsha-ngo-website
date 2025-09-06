@@ -16,7 +16,7 @@ const OurTearm = () => {
           ]}
         />
         <div>
-          <div className="grid gap-10 mx-auto lg:grid-cols-2">
+          <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 md:gap-10">
             {teamMembers.map((member, memberIndex) => (
               <TeamMemberCard key={memberIndex} {...member} />
             ))}

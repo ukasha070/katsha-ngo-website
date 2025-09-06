@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@plugin "@tailwindcss/typography";
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -125,34 +127,75 @@
   }
 
   nav a.active {
-    @apply text-yellow-500 font-black;
+    @apply text-yellow-600 font-black;
+  }
+  nav a.active span {
+    @apply text-yellow-600;
   }
 
   .form-input-container {
-    @apply relative mb-3 flex items-center justify-start
+    @apply relative mb-3 flex items-start flex-col gap-1 justify-start;
   }
 
   .form-input {
-    @apply w-full h-16 py-2 border px-4 rounded-xl outline-none focus:outline-1 focus:outline-black/50  block;
+    @apply w-full rounded-2xl border border-gray-200 bg-white/70 px-4 py-3 outline-none focus:ring-4 focus:ring-yellow-600/30 focus:border-yellow-600 transition;
   }
 
   .form-input-error-container {
-    @apply text-sm  p-1 pt-2
+    @apply text-sm  p-1 pt-2;
   }
-
+  .form-error {
+    @apply text-red-500 mt-1 text-sm;
+  }
   .form-input-error-container p {
-    @apply text-red-500
+    @apply text-red-500;
   }
 
   .overlay-container {
     @apply cursor-pointer fixed top-0 right-0 left-0  min-w-screen h-screen overflow-y-auto z-50  bg-black/50 backdrop-blur flex items-center justify-center;
   }
+  p,
+  span {
+    @apply text-black/60;
+  }
 
   button:disabled {
-    @apply opacity-60
+    @apply opacity-60;
   }
 }
 
+@layer base {
+  #article-wrapper > div {
+    @apply pt-3 pb-6;
+  }
+  #article-wrapper h2,
+  #article-wrapper h3,
+  #article-wrapper h1,
+  #article-wrapper h4,
+  #article-wrapper h5,
+  #article-wrapper h6 {
+    @apply font-bold mt-8;
+  }
+
+  #article-wrapper h2 {
+    @apply text-2xl mb-4;
+  }
+  #article-wrapper h3,
+  #article-wrapper h4,
+  #article-wrapper h5 {
+    @apply text-xl mb-4;
+  }
+
+  #article-wrapper b {
+    @apply font-bold;
+  }
+  #article-wrapper li {
+    @apply my-2 list-disc ml-10 pl-4;
+  }
+  #article-wrapper a {
+    @apply text-yellow-600 px-2 hover:bg-yellow-600 duration-300 transition-all hover:text-black/90;
+  }
+}
 
 @keyframes heartbeat {
   0% {

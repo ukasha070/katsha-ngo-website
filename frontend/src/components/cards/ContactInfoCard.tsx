@@ -23,8 +23,8 @@ const ContactInfoCard = ({
   return (
     <div
       className={cn(
-        "flex flex-col items-center p-3 text-center",
-        isLast ? "max-md:col-span-2 max-md:p-10" : ""
+        "flex flex-col items-center text-center",
+        isLast ? "max-lg:col-span-2 max-lg:p-10" : ""
       )}
     >
       <span>

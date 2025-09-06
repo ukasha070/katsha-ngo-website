@@ -8,7 +8,8 @@ import CeoSay from "../../cards/CeoSayCard";
 import { Users } from "lucide-react";
 import SectionHead from "../../SectionHead";
 import MaxWidthWrapper from "../../MaxWidthWrapper";
-import StatCounterSection from "../../innerSection/StatCounterSection";
+import StatCounterSection from "../../StatCounterSection";
+import CustomLink from "@/components/buttons/CustomLink";
 
 const HomeAbout = () => {
   return (
@@ -22,13 +23,12 @@ const HomeAbout = () => {
               "We are a dedicated team focused on creating positive change by addressing challenges with compassion and collaboration. Our mission is to empower communities through resources and support, working alongside partners to build a more just and hopeful future for all.",
             ]}
           >
-            <Link
+            <CustomLink
+              Icon={Users}
+              title="Get to Know More"
               href={"/who-we-are"}
-              className="px-6 py-4 font-bold bg-yellow-500 text-bold flex items-center gap-2"
-            >
-              <span>Get to Know More</span>
-              <Users className="size-5" />
-            </Link>
+              className="px-6 py-4 font-bold hover:bg-yellow-500 bg-yellow-600 text-bold flex items-center gap-2"
+            />
           </SectionHead>
         </MaxWidthWrapper>
 

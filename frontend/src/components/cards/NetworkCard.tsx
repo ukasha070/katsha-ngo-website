@@ -8,8 +8,9 @@ import { splitAuto } from "@/lib/utils";
 
 // components
 import { ArrowHead } from "../Icon";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, MoreVertical } from "lucide-react";
 import { PopUpAnimatedContainer } from "../Animated/PopUpAnimatedContainer";
+import CustomLink from "../buttons/CustomLink";
 
 type TNetworkCardProps = {
   icon: LucideIcon;
@@ -30,7 +31,7 @@ const NetworkCard = (props: TNetworkCardProps) => {
       key={props.title}
     >
       <div>
-        <div className="flex flex-col w-full p-10 ">
+        <div className="flex flex-col w-full p-10 py-12 ">
           <div className="flex items-center gap-8 mb-4 font-bold ">
             <props.icon />
             <h4 className="text-xl font-black capitalize">{props.title}</h4>
@@ -39,20 +40,19 @@ const NetworkCard = (props: TNetworkCardProps) => {
             {subTitleText.map((subTitleTextItem, subTitleTextIndex) => (
               <p
                 key={subTitleTextIndex}
-                style={{ backgroundColor: props.color }}
-                className="block mb-1 w-fit text-sm bg-black p-1 px-3 rounded-md text-white"
+                className="block mb-1 w-fit text-sm bg-black/80 p-1 px-3 rounded-md text-white"
               >
                 {subTitleTextItem}
               </p>
             ))}
 
-            <Link
+            <CustomLink
+              title="Visit"
+              Icon={MoreVertical}
               href={props.url}
-              className="flex items-center gap-4 font-semibold group-hover:text-black hover:font-bold transition-all duration-300 mt-5"
-            >
-              <span>Visit Now</span>
-              <ArrowHead />
-            </Link>
+              target="_blank"
+              className="w-full text-center flex items-center justify-center h-12 mt-9"
+            />
           </div>
         </div>
       </div>

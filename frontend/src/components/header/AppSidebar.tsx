@@ -48,26 +48,14 @@ const AppSidebar = () => {
 
               {/* navlinks */}
               <ul className="flex flex-col text-black/80 font-semibold divide-y divide-accent/20">
-                {/* {menuItems.map((menuItem, _) => (
-                  <li
-                    key={menuItem.id}
-                    className="bg-black h-14 sm:h-12 text-white/70  flex items-center"
-                    onClick={() => dispatch(closeSidebar())}
-                  >
-                    <Link href={menuItem.href} className="px-5">
-                      <span>{menuItem.name}</span>
-                    </Link>
-                  </li>
-                ))} */}
-
                 <NavLinksContainer
                   className="flex flex-col  font-semibold divide-y divide-accent/20 w-full items-start"
-                  liCLassName="bg-black h-14 sm:h-12 text-white/70 w-full flex items-center"
+                  liCLassName="bg-black h-16 text-white/70 w-full flex items-center"
                   aCLassName="pl-6"
                 />
 
                 <SearchBtn
-                  className="h-14 flex px-6 items-center border-l-2 border-l-black/80  gap-3"
+                  className="h-16 flex px-6 items-center border-l-2 border-l-black/80  gap-3"
                   onClick={() => dispatch(closeSidebar())}
                 >
                   <span className="font-semibold">Search</span>
@@ -75,7 +63,7 @@ const AppSidebar = () => {
 
                 <DonateBtn
                   onClick={() => dispatch(closeSidebar())}
-                  className="h-14 rounded-none w-full text-center justify-center"
+                  className="h-16 rounded-none w-full text-center justify-center"
                   innderClass="justify-center"
                 />
               </ul>

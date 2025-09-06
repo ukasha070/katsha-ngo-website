@@ -7,37 +7,7 @@ import SectionHead from "./SectionHead";
 import CustomLink from "./buttons/CustomLink";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { CircleQuestionMark } from "lucide-react";
-
-const faqs = [
-  {
-    _id: 1,
-    question: "What is the mission of your NGO?",
-    answer:
-      "Our mission is to drive sustainable development in Uganda by fostering digital transformation, empowering communities, and creating equal opportunities for all.",
-    _created_at: "2025-08-08",
-  },
-  {
-    _id: 2,
-    question: "Why is digital transformation important for Uganda?",
-    answer:
-      "Digital transformation enables better access to education, healthcare, jobs, and governance, helping Uganda close development gaps and prepare for a competitive future.",
-    _created_at: "2025-08-08",
-  },
-  {
-    _id: 3,
-    question: "How can I support your initiatives?",
-    answer:
-      "You can contribute by donating, volunteering, partnering, or sharing our mission. Every form of support helps expand our reach and impact.",
-    _created_at: "2025-08-08",
-  },
-  {
-    _id: 4,
-    question: "Who benefits from your programs?",
-    answer:
-      "Our programs primarily serve underserved communities, including rural populations, youth, and women, ensuring inclusive growth and equal access to opportunities.",
-    _created_at: "2025-08-08",
-  },
-];
+import { faqs } from "@/lib/contants";
 
 const FaQs = () => {
   const [currentFaq, setCurrentFaq] = useState<number | null>(null);
@@ -58,10 +28,11 @@ const FaQs = () => {
             >
               <div className="py-5">
                 <CustomLink
-                  title="I need help"
-                  href="/donate#need-help"
+                  title="Ask a Question"
+                  href="mailTo:hello@katsha.org"
+                  target="_blank"
                   Icon={CircleQuestionMark}
-                  className="p-3 px-7 bg-yellow-500 flex items-center justify-center gap-2 font-bold"
+                  className="p-3 px-7 flex items-center justify-center gap-2 font-bold"
                 />
               </div>
             </SectionHead>

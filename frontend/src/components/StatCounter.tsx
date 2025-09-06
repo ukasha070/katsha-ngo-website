@@ -69,14 +69,12 @@ const StatCounter: React.FC<TStatCounterProps> = ({ stats }) => {
               className="flex flex-col items-center bg-background  shadow-lg p-6 w-full max-sm:max-w-68 mx-auto rounded-3xl"
             >
               <div className="flex items-center gap-3 mb-4">
-                <IconComponent className="text-yellow-500 size-8" />
-                <span className="text-4xl font-extrabold text-yellow-500 font-mono">
+                <IconComponent className="text-yellow-600 size-8" />
+                <span className="text-4xl font-extrabold text-yellow-600 font-mono">
                   {formatNumber(counts[idx])}
                 </span>
               </div>
-              <h3 className="mt-2 text-lg text-center text-gray-700">
-                {stat.label}
-              </h3>
+              <h3 className="mt-2 text-lg text-center">{stat.label}</h3>
             </div>
           );
         })}

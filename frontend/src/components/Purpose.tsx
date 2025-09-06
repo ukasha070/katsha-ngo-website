@@ -19,11 +19,11 @@ const purposes = [
 const Purpose = () => {
   return (
     <div>
-      <MaxWidthWrapper className="my-12">
+      <MaxWidthWrapper className="my-12 sm:px-0 overflow-visible">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pb-4">
           {[
-            purposes.map((purposeItem, purposeItemIndex) => (
-              <PurposeCard key={purposeItemIndex} {...purposeItem} />
+            purposes.map((purposeItem, idx) => (
+              <PurposeCard key={idx} idx={idx} {...purposeItem} />
             )),
           ]}
         </div>

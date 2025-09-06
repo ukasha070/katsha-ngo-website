@@ -45,15 +45,15 @@ export default function NavLinksContainer({
             <Link
               href={href}
               className={cn(
-                `h-full  px-2 flex items-center border-b-2 w-full transition-colors ${
+                `h-full  px-2 flex items-center border-b-2 w-full transition-colors text-nowrap ${
                   isActive
-                    ? "border-blue-500 text-blue-500 font-black border-b-4"
-                    : "border-transparent hover:border-blue-300 hover:text-blue-300"
+                    ? "border-yellow-600 text-yellow-600 font-black border-b-4"
+                    : "border-transparent hover:border-yellow-300 hover:text-yellow-300"
                 }`,
                 aCLassName
               )}
             >
-              <span className="whitespace-nowrap">{name}</span>
+              {name}
             </Link>
           </li>
         );

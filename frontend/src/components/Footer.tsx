@@ -16,7 +16,7 @@ const Footer = () => {
         <div className="bg-accent">
           <MaxWidthWrapper>
             <div>
-              <div className="flex flex-wrap justify-start gap-6 max-w-7xl mx-auto max-xl:p-5 py-5">
+              <div className="flex flex-wrap justify-start gap-6 mx-auto py-5">
                 <div className="max-w-2xl">
                   <p>
                     Get the latest news about the IRC's innovative programs,
@@ -24,7 +24,7 @@ const Footer = () => {
                     difference.
                   </p>
                   <Link
-                    href={"/#newsletter"}
+                    href={"/newsletter#newsletter-form"}
                     className="font-semibold underline text-base mt-1 block"
                   >
                     Subscribe
@@ -37,11 +37,11 @@ const Footer = () => {
 
         <div className="bg-black/90 text-primary-foreground/60">
           <MaxWidthWrapper>
-            <div className="flex items-center flex-wrap justify-between gap-6 max-w-7xl mx-auto max-xl:p-5 py-5">
+            <div className="flex items-center flex-wrap justify-between gap-6 py-5">
               <div>
                 <ul className="flex flex-col gap-2">
                   <li>
-                    <span>
+                    <span className="text-inherit">
                       Katsha Uganda is a 501(c)(3) nonprofit organization. EIN
                       number:{" "}
                       <span className="font-semibold text-primary-foreground/80">
@@ -51,7 +51,7 @@ const Footer = () => {
                     </span>
                   </li>
                   <li>
-                    <span className="text-primary-foreground/80">
+                    <span className="text-inherit">
                       Copyright © Katsha Uganda, {currentYear}.
                     </span>
                   </li>
@@ -62,7 +62,9 @@ const Footer = () => {
                   {footerLinks.map((footerLinkItem, footerLinkIndex) => (
                     <li className="pr-2" key={footerLinkIndex}>
                       <Link href={footerLinkItem.href}>
-                        <span>{footerLinkItem.name}</span>
+                        <span className="text-inherit">
+                          {footerLinkItem.name}
+                        </span>
                       </Link>
                     </li>
                   ))}

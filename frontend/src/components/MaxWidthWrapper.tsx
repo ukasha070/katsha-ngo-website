@@ -12,7 +12,10 @@ type propType = React.ComponentPropsWithoutRef<"section"> & {
 const MaxWidthWrapper = ({ children, ...props }: propType) => {
   return (
     <section
-      className={cn("max-w-7xl mx-auto overflow-hidden px-5", props.className)}
+      className={cn(
+        "max-w-[90rem] mx-auto overflow-hidden px-5 w-full",
+        props.className
+      )}
     >
       {children}
     </section>

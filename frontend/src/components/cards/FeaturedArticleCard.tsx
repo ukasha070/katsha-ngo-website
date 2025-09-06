@@ -1,10 +1,13 @@
 import React from "react";
-import MaxWidthWrapper from "../MaxWidthWrapper";
 import Image from "next/image";
+
+// components
 import Link from "next/link";
 import { ArrowHead, Logo } from "../Icon";
+import { articleType } from "@/lib/types";
+import MaxWidthWrapper from "../MaxWidthWrapper";
 
-const FeaturedArticleCard = () => {
+const FeaturedArticleCard = ({ ...props }: articleType) => {
   return (
     <div id="feature-aritcle-40">
       <MaxWidthWrapper className="my-10 overflow-visible max-md:pb-58 px-0">
@@ -12,7 +15,7 @@ const FeaturedArticleCard = () => {
           <div className="relative w-full">
             <div className="w-full md:w-10/12 h-[20rem] md:h-[30rem] relative">
               <Image
-                src={"/background-about.webp"}
+                src={props.thumbnail ?? "/background-about.webp"}
                 alt="feature-thumbnail"
                 width={700}
                 height={500}
@@ -29,27 +32,26 @@ const FeaturedArticleCard = () => {
               <div>
                 <div
                   id="location"
-                  className="mb-5 flex items-center gap-3 divide-x"
+                  className="mb-5 text-sm flex items-center gap-3 divide-x"
                 >
                   <span className="font-semibold block pr-3">
-                    Kampala Uganda
+                    {props.location}
                   </span>
 
-                  <span>July 15 20</span>
+                  <span>{props.created_at}</span>
                 </div>
 
-                <Link href={"/articles/name of"} className="group">
-                  <h4 className="font-bold text-2xl md:text-4xl mb-5 group-hover:text-white transition-all duration-300">
-                    Crisis in Gaza: What to know and how to help
+                <Link href={`/articles/${props.slug}`} className="group">
+                  <h4 className="font-bold text-xl md:text-4xl mb-5 group-hover:text-white transition-all duration-300 line-clamp-2">
+                    {props.title}
                   </h4>
 
-                  <p className="md:text-lg block mb-5 md:mb-10 group-hover:text-white/80 transition-all duration-300">
-                    Learn more about how the IRC is delivering lifesaving aid to
-                    Palestinians, and what you can do to help.
+                  <p className="md:text-lg block mb-5 md:mb-10 group-hover:text-white/80 transition-all duration-300 max-sm:line-clamp-3">
+                    {props.subtitle}
                   </p>
 
-                  <p className="text-lg flex items-center font-semibold group-hover:text-white transition-all duration-300">
-                    <span>Read the article</span>
+                  <p className="text-lg flex items-center font-semibold group-hover:text-white max-sm:text-sm transition-all duration-300">
+                    <span className="text-current">Read the article</span>
 
                     <ArrowHead />
                   </p>

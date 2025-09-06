@@ -26,7 +26,7 @@ const CustomBtn = ({
       type="button"
       disabled={loading}
       className={cn(
-        "h-auto flex gap-4 items-center w-fit justify-center font-semibold",
+        "h-auto flex gap-4 items-center w-fit justify-center font-semibold bg-yellow-600 hover:bg-yellow-500 duration-300 ease-in",
         className
       )}
       {...props}
@@ -35,7 +35,7 @@ const CustomBtn = ({
 
       {loading && (
         <div className="w-5 h-5 aspect-square">
-          <Spinner className="border-3" />
+          <Spinner className="border-4" />
         </div>
       )}
     </button>

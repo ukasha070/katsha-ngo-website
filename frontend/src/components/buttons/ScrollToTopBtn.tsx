@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useStore } from "@/hooks/useStore";
 
 const ScrollToTopBtn = () => {
   const pathname = usePathname();
@@ -28,18 +29,23 @@ const ScrollToTopBtn = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const appSidebarState = useStore().appSidebarState;
+  const searchBoxState = useStore().searchBoxState;
   return (
-    <button
-      type="button"
-      onClick={handleClick}
-      className={cn(
-        "btn fixed bottom-6 right-6 z-50 p-3  bg-black/80 border border-accent/20 text-white shadow-lg transition-opacity duration-300",
-        visible ? "opacity-100" : "opacity-0 pointer-events-none"
-      )}
-      aria-label="Scroll to top"
-    >
-      <ArrowUp className="w-5 h-5" />
-    </button>
+    !appSidebarState.isOpen &&
+    !searchBoxState.isOpen && (
+      <button
+        type="button"
+        onClick={handleClick}
+        className={cn(
+          "btn fixed bottom-6 right-6 z-50 p-3 bg-black/80 border border-accent/20 text-white shadow-lg transition-opacity duration-300",
+          visible ? "opacity-100" : "opacity-0 pointer-events-none"
+        )}
+        aria-label="Scroll to top"
+      >
+        <ArrowUp className="w-5 h-5" />
+      </button>
+    )
   );
 };
 

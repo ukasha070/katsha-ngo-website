@@ -13,8 +13,9 @@ import TestimonialCard from "./cards/TestimonialCard";
 
 import GenericCarousel from "./GenericCarousel";
 import { CarouselItem } from "./ui/carousel";
+import CustomLink from "./buttons/CustomLink";
 
-const testimonials = [
+export const testimonials = [
   {
     profile_link: "https://example.com/profile3",
     photo: "/user5.webp",
@@ -58,27 +59,34 @@ const testimonials = [
   },
 ];
 
-const Testimonials = () => {
+const Testimonials = ({
+  title,
+  subTitle,
+}: {
+  title?: string;
+  subTitle?: string[];
+}) => {
   return (
     <section>
-      <div className="my-12">
+      <div className="my-12 py-8">
         <MaxWidthWrapper>
           <SectionHead
             className="justify-center items-center mx-auto text-center"
-            title="Testimonials"
-            subTitles={[
-              "Hear real stories from people whose lives and communities have been touched by our work.",
-              "Your voice matters. If our work has made a difference in your life or community, you can add your own testimony today and inspire others to join the cause.",
-            ]}
+            title={title ?? "Testimonials"}
+            subTitles={
+              subTitle ?? [
+                "Hear real stories from people whose lives and communities have been touched by our work.",
+                "Your voice matters. If our work has made a difference in your life or community, you can add your own testimony today and inspire others to join the cause.",
+              ]
+            }
           >
             <div className="mt-3 w-fit">
-              <Link
-                href={""}
-                className="bg-yellow-500 flex gap-2 items-center p-3 px-5"
-              >
-                <p className="font-bold">Testify</p>
-                <PlusSquare className="size-4" />
-              </Link>
+              <CustomLink
+                title="Testify"
+                href={"/testimonials#testimonial-form"}
+                Icon={PlusSquare}
+                className="bg-yellow-600 flex gap-2 items-center p-3 px-5"
+              />
             </div>
           </SectionHead>
 
